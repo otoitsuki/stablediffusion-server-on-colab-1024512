@@ -28,7 +28,7 @@ def index():
 def generate():
 	prompt = request.json["prompt"]
 	with autocast("cuda"):
-		image = pipe(prompt)["sample"][0]
+		image = pipe(prompt, height=512, width=1024)["sample"][0]
 		buf = io.BytesIO()
 		image.save(buf, format="PNG")
 		buf.seek(0)
